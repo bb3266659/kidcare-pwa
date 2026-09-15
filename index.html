@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#3b82f6" />
+<title>KidCare – บันทึกสุขภาพลูกน้อย</title>
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="icon" href="./icons/icon.svg" />
+<link rel="apple-touch-icon" href="./icons/icon.svg" />
+<link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <h1 id="pageTitle">เหตุการณ์ป่วย</h1>
+  <span id="netBadge" class="badge">ออฟไลน์พร้อมใช้</span>
+</header>
+
+<main id="view" class="view"></main>
+
+<nav class="tabbar">
+  <button class="tab active" data-tab="episodes">🤒<span>ป่วย</span></button>
+  <button class="tab" data-tab="weight">⚖️<span>น้ำหนัก</span></button>
+  <button class="tab" data-tab="height">📏<span>ส่วนสูง</span></button>
+  <button class="tab" data-tab="profile">👶<span>ข้อมูล</span></button>
+</nav>
+
+<dialog id="modal"><form method="dialog" id="modalForm"></form></dialog>
+
+<script type="module" src="./js/app.js"></script>
+</body>
+</html>
