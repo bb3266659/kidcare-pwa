@@ -1,8 +1,14 @@
 const CACHE = 'kidcare-v2';
 const ASSETS = [
-  './', './index.html', './manifest.webmanifest',
-  './css/styles.css', './js/app.js', './js/db.js',
-  './js/chart.js', './js/export.js', './icons/icon.svg'
+  '/kidcare-pwa/',
+  '/kidcare-pwa/index.html',
+  '/kidcare-pwa/manifest.webmanifest',
+  '/kidcare-pwa/css/styles.css',
+  '/kidcare-pwa/js/app.js',
+  '/kidcare-pwa/js/db.js',
+  '/kidcare-pwa/js/chart.js',
+  '/kidcare-pwa/js/export.js',
+  '/kidcare-pwa/icons/icon.svg'
 ];
 
 self.addEventListener('install', (e) => {
