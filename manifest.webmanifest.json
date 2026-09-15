@@ -4,7 +4,7 @@
   "description": "บันทึกอาการป่วย การกินยา น้ำหนักและส่วนสูงของลูก แบบออฟไลน์",
   "start_url": "./index.html",
   "scope": "./",
-  "display": "standalone",
+  "display": "standalone"
   "orientation": "portrait",
   "background_color": "#f8fafc",
   "theme_color": "#3b82f6",
