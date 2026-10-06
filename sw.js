@@ -1,4 +1,4 @@
-const CACHE = 'kidcare-v2';
+const CACHE = 'kidcare-v3';
 const ASSETS = [
   '/kidcare-pwa/',
   '/kidcare-pwa/index.html',
