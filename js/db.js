@@ -1,6 +1,6 @@
 const DB_NAME = 'kidcare-db';
 const DB_VERSION = 1;
-export const STORES = ['profile', 'episodes', 'logs', 'growth'];
+export const STORES = ['profile', 'episodes', 'logs', 'growth', 'milestones'];
 
 let _db = null;
 
@@ -25,6 +25,10 @@ export function openDB() {
       if (!db.objectStoreNames.contains('growth')) {
         const s = db.createObjectStore('growth', { keyPath: 'id', autoIncrement: true });
         s.createIndex('type', 'type');
+        s.createIndex('date', 'date');
+      }
+      if (!db.objectStoreNames.contains('milestones')) {
+        const s = db.createObjectStore('milestones', { keyPath: 'id', autoIncrement: true });
         s.createIndex('date', 'date');
       }
     };
