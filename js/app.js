@@ -239,7 +239,6 @@ async function renderGrowth(type) {
     if (confirm('ลบรายการนี้?')) { await db.remove('growth', +b.dataset.del); renderGrowth(type); }
   });
 }
-
 /* ---------- TAB 4: Milestones (พัฒนาการ & เหตุการณ์สำคัญ) ---------- */
 async function renderMilestones() {
   title.textContent = 'พัฒนาการและเหตุการณ์สำคัญ';
