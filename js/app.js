@@ -240,7 +240,43 @@ async function renderGrowth(type) {
   });
 }
 
-/* ---------- TAB 4: Profile + Backup ---------- */
+/* ---------- TAB 4: Milestones (พัฒนาการ & เหตุการณ์สำคัญ) ---------- */
+async function renderMilestones() {
+  title.textContent = 'พัฒนาการและเหตุการณ์สำคัญ';
+  const rows = (await db.all('milestones')).sort((a, b) => b.date.localeCompare(a.date));
+
+  view.innerHTML = `
+    <button class="btn primary block" id="addMilestone">+ บันทึกเหตุการณ์สำคัญ</button>
+    ${rows.map((r) => `
+      <div class="card" data-m="${r.id}">
+        <div class="row" style="align-items:flex-start">
+          <div>
+            <div class="card-title">🌟 ${esc(r.title)}</div>
+            <div class="muted">${thDate(r.date)} ${r.ageMonths ? `· อายุประมาณ ${r.ageMonths}` : ''}</div>
+            ${r.note ? `<p style="margin:6px 0 0; font-size:14px;">${esc(r.note)}</p>` : ''}
+          </div>
+          <button class="btn danger small" data-del="${r.id}">ลบ</button>
+        </div>
+      </div>`).join('') || '<p class="empty">ยังไม่มีบันทึกพัฒนาการ</p>'}`;
+
+  document.getElementById('addMilestone').onclick = () => dialog(`
+    <h3>บันทึกพัฒนาการ / เหตุการณ์สำคัญ</h3>
+    <label>หัวข้อเหตุการณ์<input name="title" placeholder="เช่น ฟันซี่แรกขึ้น, เริ่มเดิน, พูดคำว่าแม่" required /></label>
+    <label>วันที่เกิดเหตุการณ์<input type="date" name="date" value="${todayISO()}" required /></label>
+    <label>ช่วงอายุ (ถ้าจำไม่ได้ปล่อยว่างได้)<input name="ageMonths" placeholder="เช่น 6 เดือน 2 สัปดาห์" /></label>
+    <label>รายละเอียดเพิ่มเติม<textarea name="note" rows="2" placeholder="ตื่นเต้นมาก ยืนเกาะโซฟาเดินได้แล้ว"></textarea></label>`,
+    async (f) => {
+      await db.put('milestones', { date: f.date, title: f.title, ageMonths: f.ageMonths, note: f.note });
+      renderMilestones();
+    });
+
+  view.querySelectorAll('[data-del]').forEach((b) => b.onclick = async (e) => {
+    e.stopPropagation();
+    if (confirm('ลบรายการนี้?')) { await db.remove('milestones', +b.dataset.del); renderMilestones(); }
+  });
+}
+
+/* ---------- TAB 5: Profile + Backup ---------- */
 async function renderProfile() {
   title.textContent = 'ข้อมูลลูก';
   const p = (await db.get('profile', 'me')) || { id: 'me' };
@@ -346,6 +382,7 @@ const routes = {
   episodes: renderEpisodes,
   weight: () => renderGrowth('weight'),
   height: () => renderGrowth('height'),
+  milestones: renderMilestones,
   profile: renderProfile
 };
 
